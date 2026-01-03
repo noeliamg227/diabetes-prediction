@@ -15,17 +15,6 @@ The API:
 - Returns a prediction and probability
 - Provides automatic interactive documentation
 
-## Project Structure
-
-diabetes-prediction/
-├── api/
-│ ├── init.py
-│ ├── app.py # FastAPI application
-│ └── schema.py # Input validation schema (Pydantic)
-├── artifacts/
-│ └── diabetes_lr_model.joblib # Trained model artifact
-└── README.md
-
 
 ## Running the API
 
