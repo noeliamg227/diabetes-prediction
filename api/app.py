@@ -6,7 +6,7 @@ import numpy as np
 from api.schema import DiabetesInput
 
 # --------------------------------------------------
-# Crear FastAPI app
+# Create FastAPI app
 # --------------------------------------------------
 app = FastAPI(
     title="Diabetes Prediction with Logistic Regression",
@@ -15,7 +15,7 @@ app = FastAPI(
 )
 
 # --------------------------------------------------
-# Rutas a modelo y scaler
+# Routes to model and scaler
 # --------------------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -23,13 +23,13 @@ MODEL_PATH = os.path.join(BASE_DIR, "..", "artifacts", "diabetes_lr_model.joblib
 SCALER_PATH = os.path.join(BASE_DIR, "..", "artifacts", "standard_scaler.joblib")
 
 # --------------------------------------------------
-# Cargar modelo y scaler
+# Model and Scaler Loading
 # --------------------------------------------------
 model = joblib.load(MODEL_PATH)
 scaler = joblib.load(SCALER_PATH)
 
 # --------------------------------------------------
-# Interfaz web amigable y moderna
+# Web Interface
 # --------------------------------------------------
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 def home():
@@ -58,7 +58,6 @@ def home():
                 max-width: 450px;
                 box-shadow: 0 10px 25px rgba(0,0,0,0.2);
                 text-align: center;
-                /* padding horizontal interno para que los inputs no lleguen al borde */
                 box-sizing: border-box;
             }
             h2 {
@@ -66,8 +65,8 @@ def home():
                 color: #333;
             }
             input {
-                width: 90%;  /* antes era 100%, ahora ocupa un poco menos */
-                max-width: 400px; /* opcional para asegurar que no crezca demasiado en pantallas grandes */
+                width: 90%; 
+                max-width: 400px; 
                 padding: 12px;
                 margin: 8px 0;
                 border-radius: 8px;
@@ -75,7 +74,7 @@ def home():
                 font-size: 16px;
             }
             button {
-                width: 90%;  /* igual que los inputs */
+                width: 90%; 
                 max-width: 400px;
                 padding: 14px;
                 margin-top: 15px;
@@ -170,7 +169,7 @@ def home():
     """
 
 # --------------------------------------------------
-# Endpoint de predicción
+# Prediction Endpoint
 # --------------------------------------------------
 @app.post("/predict")
 def predict(input_data: DiabetesInput):
