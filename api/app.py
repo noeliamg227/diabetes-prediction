@@ -15,17 +15,21 @@ app = FastAPI(
 )
 
 # -------------------------------------------------------------------
-# Load trained model artifact
-# Path is resolved dynamically to ensure portability
+# Resolve paths to model and scaler artifacts
 # -------------------------------------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "..", "artifacts", "diabetes_lr_model.joblib")
 
+MODEL_PATH = os.path.join(BASE_DIR, "..", "artifacts", "diabetes_lr_model.joblib")
+SCALER_PATH = os.path.join(BASE_DIR, "..", "artifacts", "standard_scaler.joblib")
+
+# -------------------------------------------------------------------
+# Load trained model and fitted scaler
+# -------------------------------------------------------------------
 model = joblib.load(MODEL_PATH)
+scaler = joblib.load(SCALER_PATH)
 
 # -------------------------------------------------------------------
 # Health check endpoint
-# Used to verify that the API is running
 # -------------------------------------------------------------------
 @app.get("/")
 def health_check():
@@ -33,7 +37,6 @@ def health_check():
 
 # -------------------------------------------------------------------
 # Prediction endpoint
-# Accepts structured patient input and returns prediction + probability
 # -------------------------------------------------------------------
 @app.post("/predict")
 def predict(input_data: DiabetesInput):
@@ -51,7 +54,7 @@ def predict(input_data: DiabetesInput):
         Dictionary containing predicted class and probability.
     """
 
-    # Convert input data to NumPy array in the order expected by the model
+    # Convert input data to NumPy array (raw values)
     X = np.array([[
         input_data.pregnancies,
         input_data.glucose,
@@ -63,11 +66,15 @@ def predict(input_data: DiabetesInput):
         input_data.age
     ]])
 
-    # Generate prediction and probability using the trained model
-    prediction = model.predict(X)[0]
-    probability = model.predict_proba(X)[0][1]
+    # Apply the SAME scaler used during training
+    X_scaled = scaler.transform(X)
+
+    # Generate prediction and probability
+    prediction = model.predict(X_scaled)[0]
+    probability = model.predict_proba(X_scaled)[0][1]
 
     return {
         "prediction": int(prediction),
         "probability": round(float(probability), 4)
     }
+
