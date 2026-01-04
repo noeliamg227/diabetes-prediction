@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 import joblib
 import os
 import numpy as np
-from api.schema import DiabetesInput
+from schema import DiabetesInput
 
 # --------------------------------------------------
 # Create FastAPI app
