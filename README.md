@@ -16,7 +16,7 @@ The API:
 - Provides automatic interactive documentation
 
 
-## Running the API
+## Running the API Locally
 
 From the project root directory, start the API server with:
 
@@ -37,4 +37,15 @@ The documentation allows users to:
 - View all available endpoints
 - Inspect input and output schemas
 - Send test requests directly from the browser
+
+## Running the API with Docker
+
+Build the Docker Image: From inside the api/ directory (where the Dockerfile is located), run:
+
+docker build -t diabetes-api .
+
+Run the Docker Container:
+
+docker run -p 8000:8000 diabetes-api
+
 
