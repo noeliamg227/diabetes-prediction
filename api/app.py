@@ -18,9 +18,8 @@ app = FastAPI(
 # Routes to model and scaler
 # --------------------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-MODEL_PATH = os.path.join(BASE_DIR, "..", "artifacts", "diabetes_lr_model.joblib")
-SCALER_PATH = os.path.join(BASE_DIR, "..", "artifacts", "standard_scaler.joblib")
+MODEL_PATH = os.path.join(BASE_DIR, "artifacts", "diabetes_lr_model.joblib")
+SCALER_PATH = os.path.join(BASE_DIR, "artifacts", "standard_scaler.joblib")
 
 # --------------------------------------------------
 # Model and Scaler Loading
