@@ -16,7 +16,7 @@ The API:
 - Provides automatic interactive documentation
 
 
-## Running the API
+## Running the API Locally
 
 1. The API expects the model and scaler under api/artifacts. From the project root:
 
