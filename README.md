@@ -38,7 +38,7 @@ http://127.0.0.1:8000
 cp -r artifacts api/
 
 ​
-  2. Build the Docker image. From the api folder:
+2. Build the Docker image. From the api folder:
 
 docker build -t diabetes-api .
 
