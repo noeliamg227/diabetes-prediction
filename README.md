@@ -36,6 +36,7 @@ http://127.0.0.1:8000
 1. The API expects the model and scaler under api/artifacts. From the project root:
 
 cp -r artifacts api/
+
 ​
 2. Build the Docker image. From the api folder:
 
